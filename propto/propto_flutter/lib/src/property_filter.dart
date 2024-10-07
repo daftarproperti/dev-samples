@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'dart:html' as html;
 import 'model/property.dart';
 import 'package:flutter/foundation.dart';
 
@@ -58,14 +59,17 @@ class PropertyFilter {
 
 Future<List<PropertyListing>> fetchPropertyListingsFromBackend(PropertyFilter filter) async {
   String apiUrl;
+
   if (kIsWeb) {
-    apiUrl = 'http://localhost:8000/properties';
-  } else {
+    const apiBase = String.fromEnvironment('WEB_BACKEND', defaultValue: '/api/proxy');
+    apiUrl = '$apiBase/properties';
+  } else if (kDebugMode) {
     // if it is android or ios emulator, then use following API URL
-    apiUrl = 'http://10.0.2.2:8000/properties';
+    apiUrl = const String.fromEnvironment('MOBILE_BACKEND', defaultValue: 'http://10.0.2.2:8001/properties');
+  } else {
+    throw Exception('Missing Backend URL'); 
   }
-  
-  // const String apiUrl = 'http://localhost:8000/properties';
+
   final uri = Uri.parse(apiUrl).replace(queryParameters: filter.toQueryParameters());
 
   final response = await http.get(uri);

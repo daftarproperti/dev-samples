@@ -1,38 +1,72 @@
-version: '3.8'
-
 services:
   mongo:
     image: mongo:latest
     container_name: mongo
-    ports:
-      - "27017:27017"
+    # Uncomment this to expose
+    # ports:
+    #   - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
     volumes:
       - mongo-data:/data/db
     command: mongod --bind_ip 0.0.0.0
-    networks:
-      - mongo-network
 
   mongo-express:
     image: mongo-express:latest
     container_name: mongo-express
     ports:
-      - "8081:8081"
+      - "8055:8081"
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
       ME_CONFIG_MONGODB_ADMINPASSWORD: admin
       ME_CONFIG_MONGODB_SERVER: mongo
     depends_on:
       - mongo
-    networks:
-      - mongo-network
+
+  synchronizer:
+    build:
+      context: ./synchronizer
+      dockerfile: Dockerfile
+    container_name: synchronizer
+    depends_on:
+      - mongo
+    env_file:
+      - .env
+    environment:
+      - MONGO_URI=mongodb://admin:admin@mongo:27017
+      - DB_NAME=propto
+      - COLLECTION_NAME=example
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    # Uncomment this to expose
+    # ports:
+    #   - "8001:8000"
+    depends_on:
+      - mongo
+    env_file:
+      - .env
+    environment:
+      - MONGO_URI=mongodb://admin:admin@mongo:27017
+      - DB_NAME=propto
+      - COLLECTION_NAME=example
+    expose:
+      - "8000"
+
+  flutter-web:
+    build:
+      context: ./propto_flutter
+      dockerfile: Dockerfile
+    container_name: flutter
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
 
 volumes:
   mongo-data:
     driver: local
-
-networks:
-  mongo-network:
-    driver: bridge
