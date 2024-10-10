@@ -246,7 +246,6 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
                       ),
                     ),
                   ),
-
                   Expanded(
                     flex: 3,
                     child: _isLoading
@@ -258,8 +257,7 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
                                   style: TextStyle(fontSize: 16),
                                 ),
                               )
-                            : Padding(
-                                padding: const EdgeInsets.all(8.0),
+                            : SingleChildScrollView(
                                 child: PropertyListView(properties: properties),
                               ),
                   ),
@@ -269,6 +267,25 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class PropertyListView extends StatelessWidget {
+  final List<PropertyListing> properties;
+
+  const PropertyListView({super.key, required this.properties});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const ClampingScrollPhysics(), // Ensures list is scrollable within SingleChildScrollView
+      itemCount: properties.length,
+      itemBuilder: (context, index) {
+        final property = properties[index];
+        return PropertyCard(property: property);
+      },
     );
   }
 }
@@ -447,25 +464,6 @@ class _PropertyCardState extends State<PropertyCard> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class PropertyListView extends StatelessWidget {
-  final List<PropertyListing> properties;
-
-  const PropertyListView({super.key, required this.properties});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: properties.length,
-      itemBuilder: (context, index) {
-        final property = properties[index];
-        return PropertyCard(property: property);
-      },
     );
   }
 }
