@@ -1,0 +1,7 @@
+{
+    "dependencies": {
+        "dotenv": "^16.4.5",
+        "daftar-properti-sync": "git+https://github.com/daftarproperti/daftar-properti-sync.git#551635a12d339f964db25979ed7a31735fbe0171",
+        "mongodb": "^6.7.0"
+    }
+}
