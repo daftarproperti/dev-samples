@@ -1,0 +1,16 @@
+{
+  "name": "sync",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "daftar-properti-sync": "git+https://github.com/daftarproperti/daftar-properti-sync#551635a12d339f964db25979ed7a31735fbe0171",
+    "dotenv": "^16.4.5",
+    "mongodb": "^6.7.0"
+  }
+}

@@ -1,0 +1,37 @@
+{
+    "id": "66f67a9089abd10f6eeca936",
+    "dp_id": 8230652371591911334,
+    "title": "Apartment Transpark Juanda Bekasi Timur",
+    "description": "Dijual Apartment Transpark Juanda Bekasi Timur\r\n\r\nSelangkah dr stasiun kereta, terminal\r\n\r\nAda kampus LSPR\r\n\r\nLuas bangunan 23.99\r\n\r\nKamar tidur 1\r\n\r\nKamar mandi 1\r\n\r\nLantai 20\r\n\r\nHGB\r\n\r\nHarga 340 nego",
+    "address": "Apartment Transpark Juanda, Lt. 20 Bekasi Timur",
+    "city_id": 5802438,
+    "price": 340000000,
+    "rent_price": 0,
+    "picture_urls": [
+        "https://strapi-ef-image-bucket.s3.ap-southeast-1.amazonaws.com/easy_100_1355867179.jpg"
+    ],
+    "listing_for_sale": true,
+    "listing_for_rent": false,
+    "property_type": "apartment",
+    "bedroom_count": 1,
+    "bathroom_count": 1,
+    "car_count": 0,
+    "building_size": 24,
+    "lot_size": 24,
+    "ownership": "hgb",
+    "facing": "unknown",
+    "electrical_power": 0,
+    "source": "daftarproperti",
+    "source_urls": "https://storage.googleapis.com/daftarproperti-production-image-bucket/listings/9047996345322349489/9047996345322349489-2024-09-10T03:16:19Z.json",
+    "registrant": {
+        "name": "",
+        "company": "",
+        "profile_picture_url": "https://strapi-ef-image-bucket.s3.ap-southeast-1.amazonaws.com/easy_100_1355867179.jpg"
+    },
+    "coordinate": {
+        "coordinates": [
+            107.0176456,
+            -6.2506943
+        ]
+    }
+}
