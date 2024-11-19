@@ -192,8 +192,9 @@
 @endsection
 
 @section('scripts')
-
     <script>
+        const REVEAL_BASE_URL = '{{ Config::get("services.daftarproperti.reveal_base_url")}}';
+
         document.getElementById('toggleButton').addEventListener('click', function() {
             const description = document.getElementById('description');
             const button = document.getElementById('toggleButton');
@@ -206,81 +207,16 @@
                 button.innerText = 'Tutup Sebagian';
             }
         });
+    </script>
 
+    <script src="{{ asset('js/reveal.js') }}"></script>
+    <script>
         const revealedContact = localStorage.getItem('{{ $listing->listingIdStr }}-contact');
-
-        function whatsappContactLink(revealedContact)
-        {
-            const currentUrl = window.location.href;
-            return `<a href="https://wa.me/${revealedContact}?text=Halo, Saya tertarik dengan iklan di ${currentUrl}" target="_blank" class="btn btn-success"><i class="bi bi-whatsapp me-2"></i> Hubungi</a>`;
-        }
-
-        function setContactRevealed(revealedContact) {
-            document.getElementById('owner-phone').value = revealedContact;
-            document.getElementById('contact-action').innerHTML = whatsappContactLink(revealedContact);
-        }
-
-        function decrypt(params, receipt) {
-            const url = '{{ Config::get("services.daftarproperti.reveal_base_url")}}/api/decrypt';
-            const headers = {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            };
-
-            const body = new URLSearchParams(params).toString();
-
-            fetch(url, {
-                method: 'POST',
-                headers: headers,
-                body: body,
-            })
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(result) {
-                const revealedContact = result.decryptedContact;
-                localStorage.setItem(`${receipt.listingId}-contact`, revealedContact);
-                setContactRevealed(revealedContact);
-            })
-            .catch(function(error) {
-                console.error('Error:', error);
-            });
-
-            return localStorage.getItem(`${receipt.listingId}-contact`);
-        }
-
-        function storeReceipt(receipt, signature) {
-            //TO DO: store receipt to database
-        }
-
-        window.addEventListener('message', (event) => {
-            if (event.origin !== '{{ Config::get("services.daftarproperti.reveal_base_url")}}') {
-                return;
-            }
-
-            if (event.data.messageType === 'dp-reveal-witness') {
-
-                const urlEncoded = new URLSearchParams();
-                urlEncoded.append('signature', event.data.signature ?? '');
-
-                Object.entries(event.data.receipt ?? {}).forEach(([key, value]) => {
-                    urlEncoded.append(key, `${value}`);
-                });
-
-                storeReceipt(event.data.receipt, event.data.signature);
-                decrypt(urlEncoded.toString(), event.data.receipt);
-
-                var modalCloseButton = document.querySelector('#revealModal .btn-close');
-                modalCloseButton.click();
-            }
-        });
-
         if(revealedContact) {
             setContactRevealed(revealedContact);
         } else {
             document.getElementById('contact-action').innerHTML = '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#revealModal">Buka Nomor Pemilik</button>';
         }
     </script>
-
-
 @endsection
 
