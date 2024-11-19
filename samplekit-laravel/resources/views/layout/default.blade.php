@@ -47,7 +47,7 @@
 
         <footer class="footer mt-auto py-5 bg-light">
             <div class="text-center">
-                Samplekit Laravel
+                {{ config('app.name') }}
             </div>
         </footer>
 
