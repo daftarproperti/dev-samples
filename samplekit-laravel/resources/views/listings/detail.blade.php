@@ -164,16 +164,35 @@
             <div class="card-body">
                 <h5 class="card-title">Hubungi agen <strong>{{ $listing->registrant['name'] }}</strong></h5>
                 <p class="card-text">Silakan hubungi untuk informasi lebih lanjut.</p>
-                <a href="#" class="btn btn-primary">Hubungi</a>
+                <div class="mb-4">
+                    <input type="text" disabled class="form-control" id="owner-phone" value="+62*******"/>
+                </div>
+                <div id="contact-action">
+
+                </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
 
-
+@section('modals')
+    <div class="modal fade" id="revealModal" tabindex="-1" aria-labelledby="revealModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe width="100%" height="460" frameborder="0" src="{{ $listing->revealUrl}}"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
+
     <script>
         document.getElementById('toggleButton').addEventListener('click', function() {
             const description = document.getElementById('description');
@@ -188,6 +207,80 @@
             }
         });
 
+        const revealedContact = localStorage.getItem('{{ $listing->listingIdStr }}-contact');
+
+        function whatsappContactLink(revealedContact)
+        {
+            const currentUrl = window.location.href;
+            return `<a href="https://wa.me/${revealedContact}?text=Halo, Saya tertarik dengan iklan di ${currentUrl}" target="_blank" class="btn btn-success"><i class="bi bi-whatsapp me-2"></i> Hubungi</a>`;
+        }
+
+        function setContactRevealed(revealedContact) {
+            document.getElementById('owner-phone').value = revealedContact;
+            document.getElementById('contact-action').innerHTML = whatsappContactLink(revealedContact);
+        }
+
+        function decrypt(params, receipt) {
+            const url = '{{ Config::get("services.daftarproperti.reveal_base_url")}}/api/decrypt';
+            const headers = {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            };
+
+            const body = new URLSearchParams(params).toString();
+
+            fetch(url, {
+                method: 'POST',
+                headers: headers,
+                body: body,
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(result) {
+                const revealedContact = result.decryptedContact;
+                localStorage.setItem(`${receipt.listingId}-contact`, revealedContact);
+                setContactRevealed(revealedContact);
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+            });
+
+            return localStorage.getItem(`${receipt.listingId}-contact`);
+        }
+
+        function storeReceipt(receipt, signature) {
+            //TO DO: store receipt to database
+        }
+
+        window.addEventListener('message', (event) => {
+            if (event.origin !== '{{ Config::get("services.daftarproperti.reveal_base_url")}}') {
+                return;
+            }
+
+            if (event.data.messageType === 'dp-reveal-witness') {
+
+                const urlEncoded = new URLSearchParams();
+                urlEncoded.append('signature', event.data.signature ?? '');
+
+                Object.entries(event.data.receipt ?? {}).forEach(([key, value]) => {
+                    urlEncoded.append(key, `${value}`);
+                });
+
+                storeReceipt(event.data.receipt, event.data.signature);
+                decrypt(urlEncoded.toString(), event.data.receipt);
+
+                var modalCloseButton = document.querySelector('#revealModal .btn-close');
+                modalCloseButton.click();
+            }
+        });
+
+        if(revealedContact) {
+            setContactRevealed(revealedContact);
+        } else {
+            document.getElementById('contact-action').innerHTML = '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#revealModal">Buka Nomor Pemilik</button>';
+        }
     </script>
+
+
 @endsection
 

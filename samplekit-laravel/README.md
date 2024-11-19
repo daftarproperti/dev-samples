@@ -13,6 +13,8 @@
    - `DB_URL` = your MongoDB URL
    - `DB_DATABASE` = your database name
    - `COLLECTION_NAME` = "listings"
+   - `DP_REVEAL_BASE_URL` = "https://reveal.daftarproperti.org"
+   - `DP_REVEAL_REFERRER_ID` = your referrer id for daftarproperti
    - `DP_CONTRACT_ADDRESS` = (see details below)
    - `BLOCKCHAIN_PROVIDER_URL` = (any provider that supports the Polygon network)
    - `ABI_VERSION` = (see details below)

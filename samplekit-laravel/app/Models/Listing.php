@@ -57,4 +57,16 @@ class Listing extends Model
         }
     }
 
+    public function getRevealUrlAttribute(): string
+    {
+        $revealUrl = sprintf(
+            '%s/witness?listingId=%s&referrerId=%s',
+            config('services.daftarproperti.reveal_base_url'),
+            $this->listingIdStr,
+            urlencode(config('services.daftarproperti.reveal_referrer_id'))
+        );
+
+        return $revealUrl;
+    }
+
 }

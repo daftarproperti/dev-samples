@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'daftarproperti' => [
+        'reveal_referrer_id' => env('DP_REVEAL_REFERRER_ID',''),
+        'reveal_base_url' => env('DP_REVEAL_BASE_URL',''),
+    ],
+
 ];
