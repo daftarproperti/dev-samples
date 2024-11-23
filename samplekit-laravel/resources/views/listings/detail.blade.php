@@ -77,7 +77,7 @@
                     <tbody>
                         <tr>
                             <th class="w-15">Alamat</th>
-                            <td>{{ $listing->address }} <span class="ms-3"><i class="bi bi-geo-alt-fill"></i> <a href="https://maps.google.com/?q={{ $listing->coordinate['latitude'] }},{{ $listing->coordinate['longitude'] }}" target="_blank">Lihat Peta</a></span></td>
+                            <td>{{ $listing->address }}</td>
                         </tr>
                         <tr>
                             <th class="w-15">Kota/Kabupaten</th>
@@ -158,8 +158,12 @@
 
         </div>
     </div>
-
     <div class="col-md-4">
+        <div class="card mt-4">
+            <div class="card-body">
+                <iframe src="https://maps.google.com/maps?q={{$listing->coordinate['latitude']}},{{$listing->coordinate['longitude']}}&output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
         <div class="card mt-4">
             <div class="card-body">
                 <h5 class="card-title">Hubungi agen <strong>{{ $listing->registrant['name'] }}</strong></h5>
