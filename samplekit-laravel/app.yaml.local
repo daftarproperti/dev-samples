@@ -1,0 +1,63 @@
+# Recommended template for local environment
+# Use build-gae-image.sh to build local docker image based on this app.yaml.
+service: default
+runtime: php
+env: flex
+
+# based on https://cloud.google.com/appengine/docs/standard/lifecycle/support-schedule#php
+runtime_config:
+  operating_system: "ubuntu22"
+  # Pin to exactly 8.3.13 since there is regression about GMP in 8.3.14
+  # TODO: Unpin to latest 8.3 once issue is resolved by GCP.
+  runtime_version: "8.3.13"
+  document_root: public
+
+build_env_variables:
+  GOOGLE_COMPOSER_VERSION: 2.6.5
+
+# Contains the configurations for local environment, except that the secret ones
+# (keys/passwords) need to be replaced.
+env_variables:
+    APP_NAME: "Laravel"
+    APP_ENV: local
+    APP_KEY: set-key
+    APP_DEBUG: true
+    APP_TIMEZONE: UTC
+    APP_URL: http://localhost
+
+    APP_LOCALE: en
+    APP_FALLBACK_LOCALE: en
+    APP_FAKER_LOCALE: en_US
+
+    APP_MAINTENANCE_DRIVER: file
+
+    BCRYPT_ROUNDS: 12
+
+    LOG_CHANNEL: stack
+    LOG_STACK: single
+    LOG_DEPRECATIONS_CHANNEL: null
+    LOG_LEVEL: debug
+
+    DB_CONNECTION: mongodb
+    DB_URL: set-url
+    DB_DATABASE: samplekit
+    COLLECTION_NAME: listings
+
+    SESSION_DRIVER: file
+    SESSION_LIFETIME: 120
+    SESSION_ENCRYPT: false
+    SESSION_PATH: /
+    SESSION_DOMAIN: null
+
+    BROADCAST_CONNECTION: log
+    FILESYSTEM_DISK: local
+    QUEUE_CONNECTION: database
+
+    CACHE_STORE: database
+    CACHE_PREFIX:
+
+    DP_CONTRACT_ADDRESS:
+    BLOCKCHAIN_PROVIDER_URL: ganache.daftarproperti.org
+    DP_ABI_VERSION:
+    DP_REVEAL_BASE_URL: https://reveal.daftarproperti.org/
+    DP_REVEAL_REFERRER_ID:

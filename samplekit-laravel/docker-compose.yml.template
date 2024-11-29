@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  default:
+    image: samplekit
+    ports:
+      - 8080:8080
+    environment:
