@@ -32,6 +32,7 @@ fi
 # Change to temp dir to do the buildpack in a clean checkout.
 pushd $TEMP_DIR
 pack build samplekit --builder gcr.io/serverless-runtimes/google-22-full/builder/php:latest \
+    --env NGINX_SERVES_STATIC_FILES=true \
     --env GOOGLE_COMPOSER_VERSION=2.6.5 \
     --env GOOGLE_RUNTIME_VERSION=8.3.13 \
     --env GOOGLE_RUNTIME=php \
