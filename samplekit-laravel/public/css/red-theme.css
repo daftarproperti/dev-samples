@@ -81,15 +81,6 @@ a:focus {
     text-decoration: none;
 }
 
-.form-select, .form-control {
-    font-size: 18px;
-}
-
-.page-item span,
-.page-item a{
-    font-size: 18px;
-}
-
 .card{
     border:1px solid #f4f4f4;
 }
