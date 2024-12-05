@@ -3,7 +3,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     color: #333;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -13,10 +13,6 @@ h1, h2, h3, h4, h5, h6,
 
 .h6, h6 {
     font-size: 1.3rem;
-}
-
-.btn {
-    font-size: 18px;
 }
 
 .btn-check:checked+.btn.btn.btn-primary, .btn.btn-primary.active, .btn.btn-primary.show, .btn.btn-primary:first-child:active, :not(.btn-check)+.btn.btn-primary:active,
