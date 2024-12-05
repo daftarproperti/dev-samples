@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    font-size: 18px;
+}
+
+h1, h2, h3, h4, h5, h6,
+.card-title {
+    font-family: 'Roboto Slab', sans-serif;
+}
+
+.h6, h6 {
+    font-size: 1.3rem;
+}
+
+.btn {
+    font-size: 18px;
+}
+
+.btn-check:checked+.btn.btn.btn-primary, .btn.btn-primary.active, .btn.btn-primary.show, .btn.btn-primary:first-child:active, :not(.btn-check)+.btn.btn-primary:active,
+.btn.btn-primary{
+    background-color: #ed2126;
+    border-color: #FFF;
+}
+
+.btn.btn-primary:hover {
+    background-color: #c92024;
+    border-color: #FFF;
+}
+
+.btn.btn-success {
+    background-color: #333;
+}
+
+.btn-check:checked+.btn.btn.btn-success, .btn.btn-success.active, .btn.btn-success.show, .btn.btn-success:first-child:active, :not(.btn-check)+.btn.btn-success:active {
+    background-color: #000000;
+}
+header.bg-dark{
+    background-color: #FFF !important;
+    border-bottom: 1px solid #ddd9d9;
+}
+
+.navbar-brand:focus, .navbar-brand:hover,
+.navbar-brand {
+    color: #ed2126;
+}
+
+.bg-dark .nav-link {
+    color: #000000;
+}
+.bg-dark .nav-link:hover, .bg-dark .nav-link:focus {
+    color: #ed2126;
+}
+
+.active .page-link:hover,
+.active>.page-link, .page-link.active {
+    color: #fff;
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.page-link {
+    color: #000000;
+}
+
+.page-link:hover {
+    color: #000000;
+}
+
+.page-link:focus {
+    color: #000000;
+    box-shadow: none !important;
+}
+
+a {
+    color: #ed2126;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    color: #c92024;
+    text-decoration: none;
+}
+
+.form-select, .form-control {
+    font-size: 18px;
+}
+
+.page-item span,
+.page-item a{
+    font-size: 18px;
+}
+
+.card{
+    border:1px solid #f4f4f4;
+}
+
+.card-footer {
+    border-top:none;
+}
+
+.card-text .text-bg-success {
+    color: #c92024 !important;
+    background-color: #f4f4f4 !important;
+}
+
+.text-location {
+    font-size: 14px;
+    color: #808080;
+    margin: 20px 0px;
+}
+
+.listing-feature {
+    font-size: 14px;
+}
+
+
+h6.link-title a:hover{
+    color:#ed2126;
+    text-decoration: none;
+}
+
+footer.footer{
+    background-color: #FFF !important;
+    border-top: 2px solid #ed2126;
+}
+
+.description-holder{
+    background-color:transparent !important;
+    padding: 20px 0px !important;
+}

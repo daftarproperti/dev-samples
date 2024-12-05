@@ -1,28 +1,4 @@
 @extends('layout.default')
-@section('styles')
-    <style>
-        .card-img-top {
-            height: 200px;
-        }
-
-        .card-image-holder {
-            position: relative;
-        }
-
-        .listing-info-holder {
-            position: absolute;
-            bottom: 0px;
-            left: 0px;
-            background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-        }
-
-        .badge-listing-info {
-            color: #FFF;
-            font-weight: bold;
-            font-size: 14px;
-        }
-    </style>
-@endsection
 
 @section('content')
     <div class="row mb-3">
@@ -106,23 +82,24 @@
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text"><span class="badge {{$listing->listingForRent ? 'text-bg-warning' : 'text-bg-success'}}"><i class="bi bi-tag-fill"></i> {{ $listing->listingForRent ? 'Disewakan' : 'Dijual' }} {{ $listing->typeName }}</span></p>
-                                    <h6 class="card-title">{{ $listing->address }}</h6>
-                                    <p class="card-text"><i class="bi bi-geo-alt-fill"></i> {{ $listing->cityName }}</p>
-                                    <div class="listing-feature ps-1">
-                                        @if ($listing->bedroomCount)
-                                            <span class="me-3"><i class="fa-solid fa-bed"></i> {{ $listing->bedroomCount }}</span>
-                                        @endif
-                                        @if ($listing->bathroomCount)
-                                            <span class="me-3"><i class="fa-solid fa-bath"></i> {{ $listing->bathroomCount }}</span>
-                                        @endif
-                                        @if ($listing->carCount)
-                                            <span><i class="fa-solid fa-car"></i> {{ $listing->carCount }}</span>
-                                        @endif
-                                    </div>
+                                    <h6 class="card-title link-title"><a href="{{ route('listings.show', $listing->id) }}">{{ $listing->address }}</a></h6>
+                                    <p class="card-text text-location"><i class="bi bi-geo-alt-fill"></i> {{ $listing->cityName }}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{ route('listings.show', $listing->id) }}" class="btn btn-primary">Lihat Detail</a>
-
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="listing-feature ps-1">
+                                            @if ($listing->bedroomCount)
+                                                <span class="me-2"><i class="fa-solid fa-bed"></i> {{ $listing->bedroomCount }}</span>
+                                            @endif
+                                            @if ($listing->bathroomCount)
+                                                <span class="me-2"><i class="fa-solid fa-bath"></i> {{ $listing->bathroomCount }}</span>
+                                            @endif
+                                            @if ($listing->carCount)
+                                                <span><i class="fa-solid fa-car"></i> {{ $listing->carCount }}</span>
+                                            @endif
+                                        </div>
+                                        <a href="{{ route('listings.show', $listing->id) }}" class="btn btn-primary">Lihat Detail</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

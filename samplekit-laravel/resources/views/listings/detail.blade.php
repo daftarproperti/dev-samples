@@ -6,15 +6,6 @@
             max-height: 500px;
         }
 
-        .description {
-            max-height: 150px;
-            overflow: hidden;
-        }
-
-        .expanded {
-            max-height: none;
-        }
-
         .w-15 {
             width: 15% !important;
         }
@@ -68,7 +59,6 @@
                 <div class="description  mb-3" id="description">
                     {!! $listing->description !!}</p>
                 </div>
-                <a href="javascript:void(0)" id="toggleButton">Lihat Selengkapnya</a>
             </div>
 
             <h5>Informasi Lainnya</h5>
@@ -198,19 +188,6 @@
 @section('scripts')
     <script>
         const REVEAL_BASE_URL = '{{ Config::get("services.daftarproperti.reveal_base_url")}}';
-
-        document.getElementById('toggleButton').addEventListener('click', function() {
-            const description = document.getElementById('description');
-            const button = document.getElementById('toggleButton');
-
-            if (description.classList.contains('expanded')) {
-                description.classList.remove('expanded');
-                button.innerText = 'Lihat Selengkapnya';
-            } else {
-                description.classList.add('expanded');
-                button.innerText = 'Tutup Sebagian';
-            }
-        });
     </script>
 
     <script src="{{ asset('js/reveal.js') }}"></script>

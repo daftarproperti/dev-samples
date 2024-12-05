@@ -31,6 +31,11 @@
                 font-size: var(--bs-body-font-size);
             }
         </style>
+        <link rel="stylesheet" href="{{ asset('css/default.css') }}"/>
+        @if(config('app.theme_color') == 'red')
+            <link rel="stylesheet" href="{{ asset('css/red-theme.css') }}"/>
+        @endif
+
         @yield('styles')
     </head>
     <body>
@@ -47,8 +52,10 @@
         </main>
 
         <footer class="footer mt-auto py-5 bg-light">
-            <div class="text-center">
-                {{ config('app.name') }}
+            <div class="container-xxl">
+                <div class="d-flex justify-content-between">
+                    @include('includes.footer')
+                </div>
             </div>
         </footer>
 

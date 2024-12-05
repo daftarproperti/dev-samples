@@ -1,0 +1,33 @@
+h6.link-title a{
+    color:#333;
+    text-decoration: none;
+}
+
+.carousel-item img {
+    max-height: 500px;
+}
+
+.w-15 {
+    width: 15% !important;
+}
+
+.card-img-top {
+    height: 200px;
+}
+
+.card-image-holder {
+    position: relative;
+}
+
+.listing-info-holder {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.badge-listing-info {
+    color: #FFF;
+    font-weight: bold;
+    font-size: 14px;
+}

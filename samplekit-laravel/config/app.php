@@ -123,5 +123,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'logo' => env('APP_LOGO_URL', '')
+    'logo' => env('APP_LOGO_URL', ''),
+
+    'theme_color' => env('THEME_COLOR', ''),
 ];
