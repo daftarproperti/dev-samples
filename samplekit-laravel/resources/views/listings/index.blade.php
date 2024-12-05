@@ -2,14 +2,22 @@
 
 @section('content')
     <div class="row mb-3">
-        <div class="col-md-3 ">
+        <div class="col-md-3 mb-4">
             <div class="sticky-top" style="top: 80px;">
                 <h4 class="mb-3">Filter</h4>
                 <form  id="filter-form">
                     @csrf
                     <div class="input-group mb-3">
                         <label class="input-group-text"><i class="bi bi-search"></i></label>
-                        <input type="text" class="form-control" name="search" placeholder="Cari..." value="{{ request()->get('search') }}">
+                        <input type="text" class="form-control" name="search" placeholder="kata kunci..." value="{{ request()->get('search') }}">
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text"><i class="fa-solid fa-house"></i></label>
+                        <select class="form-select" name="type">
+                            <option value="">- Pilih -</option>
+                            <option value="rent" @if(request()->get('type') == 'rent') selected @endif>Sewa</option>
+                            <option value="sale" @if(request()->get('type') == 'sale') selected @endif>Jual</option>
+                        </select>
                     </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text"><i class="bi bi-geo-alt-fill"></i></label>
@@ -38,7 +46,7 @@
                         </select>
                     </div>
                     <div class="input-group mb-3">
-                        <label class="input-group-text"><strong>Rp</strong></label>
+                        <label class="input-group-text"><i class="fa-solid fa-coins"></i></label>
                         <input type="number" class="form-control" name="price[min]" placeholder="Harga Min" min="0" value="{{ request()->get('price', ['min' => '', 'max' => ''])['min'] }}">
                         <input type="number" class="form-control" name="price[max]" placeholder="Harga Max" min="0" value="{{ request()->get('price', ['min' => '', 'max' => ''])['max'] }}">
                     </div>
@@ -49,16 +57,8 @@
                         <input type="number" class="form-control" name="lotSize[max]" placeholder="Luas Tanah Max" min="0" value="{{ request()->get('lotSize', ['min' => '', 'max' => ''])['max'] }}">
                     </div>
 
-                    <div class="input-group mb-3">
-                        <label class="input-group-text"><i class="fa-solid fa-house"></i></label>
-                        <select class="form-select" name="type">
-                            <option value="">- Pilih -</option>
-                            <option value="rent" @if(request()->get('type') == 'rent') selected @endif>Sewa</option>
-                            <option value="sale" @if(request()->get('type') == 'sale') selected @endif>Jual</option>
-                        </select>
-                    </div>
                     <button class="btn btn-success" type="submit">Cari</button>
-                    <a href="{{ route('listings.index') }}" class="btn btn-secondary">Muat Ulang</a>
+                    <a href="{{ route('listings.index') }}" class="btn btn-secondary">Reset</a>
                 </form>
             </div>
         </div>

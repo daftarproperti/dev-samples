@@ -1,7 +1,7 @@
 function whatsappContactLink(revealedContact)
 {
     const currentUrl = window.location.href;
-    return `<a href="https://wa.me/${revealedContact}?text=Halo, Saya tertarik dengan iklan di ${currentUrl}" target="_blank" class="btn btn-success"><i class="bi bi-whatsapp me-2"></i> Hubungi</a>`;
+    return `<a href="https://wa.me/${revealedContact}?text=Halo, Saya tertarik dengan iklan di ${currentUrl}" target="_blank" class="btn btn-glow" style="background-color: #25D366; color: white; font-weight: 600;"><i class="bi bi-whatsapp me-2"></i> Hubungi</a>`;
 }
 
 function setContactRevealed(revealedContact) {

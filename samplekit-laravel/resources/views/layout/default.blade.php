@@ -22,6 +22,10 @@
                 --bs-btn-font-size: var(--bs-body-font-size);
             }
 
+            #filter-form label i {
+                min-width: 20px;
+            }
+
             .page-link {
                 --bs-pagination-font-size: var(--bs-body-font-size);
             }
@@ -29,6 +33,21 @@
             .form-select,
             .form-control {
                 font-size: var(--bs-body-font-size);
+            }
+
+            /* Custom CSS for glowing effect */
+            .btn-glow {
+              position: relative;
+              animation: glow-animation 0.5s infinite alternate;
+            }
+
+            @keyframes glow-animation {
+              0% {
+                box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+              }
+              100% {
+                box-shadow: 0 0 8px rgba(0, 123, 255, 0.9), 0 0 12px rgba(0, 123, 255, 0.7);
+              }
             }
         </style>
         <link rel="stylesheet" href="{{ asset('css/default.css') }}"/>
@@ -39,7 +58,7 @@
         @yield('styles')
     </head>
     <body>
-        <header class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <header class="navbar navbar-expand-md navbar-dark bg-dark sticky-top" style="z-index: 2000;">
             <div class="container-xxl">
                 @include('includes.header')
             </div>

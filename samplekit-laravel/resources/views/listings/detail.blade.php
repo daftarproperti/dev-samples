@@ -48,21 +48,21 @@
 </div>
 
 <hr/>
-<h2 class="title my-3">{{ $listing->typeName ? $listing->typeName . ' : ' : '' }} {{ $listing->address }}</h2>
+<h2 class="title my-3">{{ $listing->typeName ? $listing->typeName . ': ' : '' }} {{ $listing->address }}</h2>
 <hr/>
 
 <div class="row">
     <div class="col-md-8">
         <div class="details">
             <h5>Deskripsi</h5>
-            <div class="description-holder bg-light p-3 mb-4">
+            <div class="description-holder bg-light py-3">
                 <div class="description  mb-3" id="description">
                     {!! $listing->description !!}</p>
                 </div>
             </div>
 
-            <h5>Informasi Lainnya</h5>
-            <div class="special-info bg-light p-3">
+            <h5>Spesifikasi</h5>
+            <div class="special-info bg-light border mt-3" style="border-color: gray;">
                 <table class="table table-striped-columns">
                     <tbody>
                         <tr>
@@ -151,12 +151,17 @@
     <div class="col-md-4">
         <div class="card mt-4">
             <div class="card-body">
+                <div class="d-flex align-items-center text-success mb-2">
+                  <i class="bi bi-check-circle-fill me-2"></i>
+                  <span>Lokasi Terverifikasi</span>
+                  <i class="bi bi-info-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Seluruh listing di telah melalui proses verifikasi oleh Daftar Properti."></i>
+                </div>
                 <iframe src="https://maps.google.com/maps?q={{$listing->coordinate['latitude']}},{{$listing->coordinate['longitude']}}&output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
         <div class="card mt-4">
             <div class="card-body">
-                <h5 class="card-title">Hubungi agen <strong>{{ $listing->registrant['name'] }}</strong></h5>
+                <h5 class="card-title">Hubungi <strong>{{ $listing->registrant['name'] }}</strong></h5>
                 <p class="card-text">Silakan hubungi untuk informasi lebih lanjut.</p>
                 <div class="mb-4">
                     <input type="text" disabled class="form-control" id="owner-phone" value="+62*******"/>
@@ -196,7 +201,7 @@
         if(revealedContact) {
             setContactRevealed(revealedContact);
         } else {
-            document.getElementById('contact-action').innerHTML = '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#revealModal">Buka Nomor Pemilik</button>';
+            document.getElementById('contact-action').innerHTML = '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#revealModal"><i class="bi bi-lock"></i> Buka Nomor Kontak</button>';
         }
     </script>
 @endsection
