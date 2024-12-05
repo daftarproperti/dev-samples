@@ -118,3 +118,26 @@ footer.footer{
 .description-holder{
     background-color:transparent !important;
 }
+
+ul.related-news {
+  list-style: none;
+  padding-left: 0;
+}
+ul.related-news li {
+  position: relative;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-left: 20px;
+}
+ul.related-news li::before {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 0;
+  content: "";
+  background: red;
+  height: 8px;
+  width: 8px;
+  border-radius: 100%;
+}

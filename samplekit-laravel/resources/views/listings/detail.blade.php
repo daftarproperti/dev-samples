@@ -63,7 +63,7 @@
 
             <h5>Spesifikasi</h5>
             <div class="special-info bg-light border mt-3" style="border-color: gray;">
-                <table class="table table-striped-columns">
+                <table class="table table-striped-columns mb-0">
                     <tbody>
                         <tr>
                             <th class="w-15">Alamat</th>
@@ -171,6 +171,18 @@
                 </div>
             </div>
         </div>
+        @if(isset($articles) && count($articles) > 0)
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Berita Terkait</h5>
+                <ul class="related-news">
+                  @foreach($articles as $article)
+                    <li>{{ $article }}</li>
+                  @endforeach
+                </ul>
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 @endsection
