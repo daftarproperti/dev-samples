@@ -38,9 +38,9 @@
     @endif
 </div>
 
-<h3 class="price mt-3">{{ $listing->formattedPrice }}</h3>
+<h3 class="price mt-3">{{ $listing->formattedPrice }}@if ($listing->formattedRentPrice) / {{$listing->formattedRentPrice}} (sewa) @endif</h3>
 
-<div class="listing-info">
+<div class="listing-info mt-3">
     <span><i class="bi bi-geo-alt-fill"></i> {{ $listing->cityName }}</span>
     @if ($listing->lotSize > 0)
     <span class="ms-3"><i class="bi bi-aspect-ratio"></i> {{ $listing->lotSize }} m2</span>

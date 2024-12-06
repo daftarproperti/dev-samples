@@ -31,3 +31,8 @@ h6.link-title a{
     font-weight: bold;
     font-size: 14px;
 }
+
+.card .price {
+    font-size: 18px;
+    font-weight: bold;
+}

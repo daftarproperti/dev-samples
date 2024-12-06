@@ -71,7 +71,7 @@
                                 <div class="card-image-holder">
                                     <img src="{{ $listing->thumbnail }}" class="card-img-top object-fit-cover">
                                     <div class="listing-info-holder w-100 px-3 pb-3 pt-5">
-                                        <span class="badge-listing-info rounded py-1 px-2 border">{{ $listing->formattedPrice }}</span>
+
                                         @if ($listing->lotSize > 0)
                                         <span class="badge-listing-info rounded py-1 px-2 border"><i class="bi bi-aspect-ratio"></i> {{ $listing->lotSize }} m2</span>
                                         @endif
@@ -81,9 +81,33 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text"><span class="badge {{$listing->listingForRent ? 'text-bg-warning' : 'text-bg-success'}}"><i class="bi bi-tag-fill"></i> {{ $listing->listingForRent ? 'Disewakan' : 'Dijual' }} {{ $listing->typeName }}</span></p>
-                                    <h6 class="card-title link-title"><a href="{{ route('listings.show', $listing->listingId) }}">{{ $listing->address }}</a></h6>
-                                    <p class="card-text text-location"><i class="bi bi-geo-alt-fill"></i> {{ $listing->cityName }}</p>
+                                    <p class="card-text">
+                                        @if ($listing->listingForSale && $listing->listingForRent)
+                                            <span class="badge text-bg-warning">
+                                                <i class="bi bi-tag-fill"></i>Disewakan {{ $listing->typeName }}
+                                            </span>
+                                            <span class="badge text-bg-success ms-2">
+                                                <i class="bi bi-tag-fill"></i>Dijual {{ $listing->typeName }}
+                                            </span>
+                                        @elseif ($listing->listingForRent && !$listing->listingForSale)
+                                            <span class="badge text-bg-warning">
+                                                <i class="bi bi-tag-fill"></i>Disewakan {{ $listing->typeName }}
+                                            </span>
+                                        @else
+                                            <span class="badge text-bg-success">
+                                                <i class="bi bi-tag-fill"></i>Dijual {{ $listing->typeName }}
+                                            </span>
+                                        @endif
+                                    </p>
+                                    <h6 class="card-title link-title mb-3"><a href="{{ route('listings.show', $listing->listingId) }}">{{ $listing->address }}</a></h6>
+
+                                    <div class="price sell-price">{{ $listing->formattedPrice }}</div>
+
+                                    @if ($listing->formattedRentPrice)
+                                        <div class="price rent-price">{{ $listing->formattedRentPrice }} (sewa)</div>
+                                    @endif
+
+                                    <p class="card-text text-location mt-3"><i class="bi bi-geo-alt-fill"></i> {{ $listing->cityName }}</p>
                                 </div>
                                 <div class="card-footer">
                                     <div class="d-flex justify-content-between align-items-center">

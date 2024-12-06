@@ -94,6 +94,11 @@ a:focus {
     background-color: #f4f4f4 !important;
 }
 
+.card-text .text-bg-warning {
+    color: #333 !important;
+    background-color: #f4f4f4 !important;
+}
+
 .text-location {
     font-size: 14px;
     color: #808080;
@@ -140,4 +145,8 @@ ul.related-news li::before {
   height: 8px;
   width: 8px;
   border-radius: 100%;
+}
+
+.sell-price {
+    color: #c92024;
 }
