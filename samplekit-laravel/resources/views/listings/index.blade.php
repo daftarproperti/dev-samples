@@ -60,6 +60,18 @@
                     <button class="btn btn-success" type="submit">Cari</button>
                     <a href="{{ route('listings.index') }}" class="btn btn-secondary">Reset</a>
                 </form>
+                @if(isset($articles) && count($articles) > 0)
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Berita Properti Terkini</h5>
+                        <ul class="related-news">
+                          @foreach($articles as $article)
+                            <li>{{ $article }}</li>
+                          @endforeach
+                        </ul>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
         <div class="col-md-9">
