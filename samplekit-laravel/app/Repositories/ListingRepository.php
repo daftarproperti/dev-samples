@@ -33,10 +33,34 @@ class ListingRepository
 
         $query->when(isset($params['price']), function ($query) use ($params) {
             $min = isset($params['price']['min']) ? (int)$params['price']['min'] : 0;
-            $max = isset($params['price']['max']) ? (int)$params['price']['max'] : 0;
+            $max = isset($params['price']['max']) ? (int)$params['price']['max'] : 999999999999999;
 
             if ($min || $max) {
-                $query->whereBetween('price', [$min, $max]);
+                $query->where(function ($subQuery) use ($min, $max) {
+                    $subQuery
+                        ->where('listingForSale', true)
+                        ->where('listingForRent', true)
+                        ->where(function ($q) use ($min, $max) {
+                            $q->whereBetween('price', [$min, $max])
+                              ->orWhereBetween('rentPrice', [$min, $max]);
+                        });
+                })
+                ->orWhere(function ($subQuery) use ($min, $max) {
+                    $subQuery
+                        ->where('listingForSale', true)
+                        ->where('listingForRent', false)
+                        ->where(function ($q) use ($min, $max) {
+                            $q->whereBetween('price', [$min, $max]);
+                        });
+                })
+                ->orWhere(function ($subQuery) use ($min, $max) {
+                    $subQuery
+                        ->where('listingForSale', false)
+                        ->where('listingForRent', true)
+                        ->where(function ($q) use ($min, $max) {
+                            $q->whereBetween('rentPrice', [$min, $max]);
+                        });
+                });
             }
         });
 

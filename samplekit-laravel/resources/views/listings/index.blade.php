@@ -47,7 +47,7 @@
                     </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text"><i class="fa-solid fa-coins"></i></label>
-                        <input type="number" class="form-control" name="price[min]" placeholder="Harga Min" min="0" value="{{ request()->get('price', ['min' => '', 'max' => ''])['min'] }}">
+                        <input type="number" class="form-control" name="price[min]" placeholder="Harga Min" min="0" value="{{ request()->get('price', ['min' => '', 'max' => ''])['min'] ?? 0 }}">
                         <input type="number" class="form-control" name="price[max]" placeholder="Harga Max" min="0" value="{{ request()->get('price', ['min' => '', 'max' => ''])['max'] }}">
                     </div>
 
