@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Listing;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Route;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,5 +23,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+
+        Route::bind('listing', function ($value) {
+            return Listing::where('listingId', (int)$value)->firstOrFail();
+        });
     }
 }

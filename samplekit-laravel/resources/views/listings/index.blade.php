@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text"><span class="badge {{$listing->listingForRent ? 'text-bg-warning' : 'text-bg-success'}}"><i class="bi bi-tag-fill"></i> {{ $listing->listingForRent ? 'Disewakan' : 'Dijual' }} {{ $listing->typeName }}</span></p>
-                                    <h6 class="card-title link-title"><a href="{{ route('listings.show', $listing->id) }}">{{ $listing->address }}</a></h6>
+                                    <h6 class="card-title link-title"><a href="{{ route('listings.show', $listing->listingId) }}">{{ $listing->address }}</a></h6>
                                     <p class="card-text text-location"><i class="bi bi-geo-alt-fill"></i> {{ $listing->cityName }}</p>
                                 </div>
                                 <div class="card-footer">
@@ -98,7 +98,7 @@
                                                 <span><i class="fa-solid fa-car"></i> {{ $listing->carCount }}</span>
                                             @endif
                                         </div>
-                                        <a href="{{ route('listings.show', $listing->id) }}" class="btn btn-primary">Lihat Detail</a>
+                                        <a href="{{ route('listings.show', $listing->listingId) }}" class="btn btn-primary">Lihat Detail</a>
                                     </div>
                                 </div>
                             </div>
