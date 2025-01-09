@@ -4,7 +4,7 @@
         "dotenv": "^16.4.5",
         "express": "^4.19.2",
         "fastest-levenshtein": "^1.0.16",
-        "daftar-properti-sync": "git+https://github.com/daftarproperti/daftar-properti-sync.git#551635a12d339f964db25979ed7a31735fbe0171",
+        "daftar-properti-sync": "git+https://github.com/daftarproperti/daftar-properti-sync.git#e32abe19de8bd17c16dac6f2193be7d9083adce7",
         "mongodb": "^6.7.0"
     }
 }
