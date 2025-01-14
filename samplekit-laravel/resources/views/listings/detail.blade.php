@@ -167,7 +167,7 @@
                     <input type="text" disabled class="form-control" id="owner-phone" value="+62*******"/>
                 </div>
                 <div id="contact-action">
-
+                    <button type="button" class="btn btn-primary" data-dp-listing-id="{{ $listing->listingIdStr }}"><i class="bi bi-lock"></i> Buka Nomor Kontak</button>'
                 </div>
             </div>
         </div>
@@ -187,33 +187,55 @@
 </div>
 @endsection
 
-@section('modals')
-    <div class="modal fade" id="revealModal" tabindex="-1" aria-labelledby="revealModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <iframe width="100%" height="460" frameborder="0" src="{{ $listing->revealUrl}}"></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
-
 @section('scripts')
-    <script>
-        const REVEAL_BASE_URL = '{{ Config::get("services.daftarproperti.reveal_base_url")}}';
-    </script>
-
-    <script src="{{ asset('js/reveal.js') }}"></script>
+    <script src="{{ asset('js/reveal-bundle.js') }}"></script>
     <script>
         const revealedContact = localStorage.getItem('{{ $listing->listingIdStr }}-contact');
         if(revealedContact) {
             setContactRevealed(revealedContact);
         } else {
-            document.getElementById('contact-action').innerHTML = '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#revealModal"><i class="bi bi-lock"></i> Buka Nomor Kontak</button>';
+            document.getElementById('contact-action').innerHTML = '<button type="button" class="btn btn-primary" data-dp-listing-id="{{ $listing->listingIdStr }}"><i class="bi bi-lock"></i> Buka Nomor Kontak</button>';
+        }
+
+        const REVEAL_BASE_URL = '{{ Config::get("services.daftarproperti.reveal_base_url")}}';
+
+        const dpRevealApi = new DpRevealApi({
+            revealBaseUrl: REVEAL_BASE_URL,
+            referrerId: '{{ Config::get("services.daftarproperti.reveal_referrer_id")}}',
+            onRevealed: (listingId, revealedContact) => {
+                localStorage.setItem(`${listingId}-contact`, revealedContact);
+                setContactRevealed(revealedContact);
+            },
+            onReceipt: (listingId, receipt, signature) => {
+                storeReceipt(receipt, signature);
+            }
+          });
+
+        dpRevealApi.init();
+
+        function whatsappContactLink(revealedContact)
+        {
+            const currentUrl = window.location.href;
+            return `<a href="https://wa.me/${revealedContact}?text=Halo, Saya tertarik dengan iklan di ${currentUrl}" target="_blank" class="btn btn-glow" style="background-color: #25D366; color: white; font-weight: 600;"><i class="bi bi-whatsapp me-2"></i> Hubungi</a>`;
+        }
+
+        function setContactRevealed(revealedContact) {
+            document.getElementById('owner-phone').value = revealedContact;
+            document.getElementById('contact-action').innerHTML = whatsappContactLink(revealedContact);
+        }
+
+        function storeReceipt(receipt, signature) {
+            fetch('/receipts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ receipt, signature }),
+            })
+            .catch(function(error) {
+                console.error('Receipt Saved. Error:', error);
+            });
         }
     </script>
 @endsection

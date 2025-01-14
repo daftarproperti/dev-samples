@@ -52,3 +52,10 @@
    ```
 
 Now, you can access the sample kit with the data listings!
+
+## Additional Information
+
+On the property detail page, there is an "Buka Nomor Kontak" function.  
+To open the contact number, we use the `reveal-bundle.js` script, which is located in the `public/js` folder.  
+The `reveal-bundle.js` file is provided by the `dp-reveal-api-sdk` library repository, and you can generate it from that repository.
+
